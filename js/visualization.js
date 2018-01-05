@@ -58,6 +58,43 @@ class Shape {
         }
         return xs;
       });
+    } else if (prefs.shapeType === "klein bottle") {
+      prefs.dimensions = 4;
+      createdShape = bottle.map((xs, i) => {
+        if (i === 0) {
+          return xs
+            .map(homogeneous)
+        }
+        return xs;
+      });
+    } else if (prefs.shapeType === "sphere") {
+      prefs.dimensions = 3;
+      createdShape = sphere.map((xs, i) => {
+        if (i === 0) {
+          return xs
+            .map(homogeneous)
+        }
+        return xs;
+      });
+    } else if (prefs.shapeType === "mobius strip") {
+      prefs.dimensions = 3;
+      createdShape = mobius.map((xs, i) => {
+        if (i === 0) {
+          return xs
+            .map(homogeneous)
+        }
+        return xs;
+      });
+    } else if (prefs.shapeType === "cliffords torus") {
+      prefs.dimensions = 4;
+      createdShape = cliffordstorus.map((xs, i) => {
+        if (i === 0) {
+          return xs
+            .map(homogeneous)
+           
+        }
+        return xs;
+      });
     }
 
     updateAnimationMatrix();
@@ -186,7 +223,11 @@ function setupGui() {
       "hecatonicosachoron",
       "hexacosichoron",
       "icositetrachoron",
-      "hexadecachoron"
+      "hexadecachoron",
+      "klein bottle",
+      "mobius strip",
+      "sphere",
+      "cliffords torus"
     ])
     .name("Type Of Shape");
   const speedGui = gui
@@ -196,14 +237,13 @@ function setupGui() {
 
   const screenshotObj = {
     snap: () => {
-      const a = document.createElement('a')
-      a.href = renderer
-        .domElement
+      const a = document.createElement("a");
+      a.href = renderer.domElement
         .toDataURL()
-        .replace("image/png", "image/octet-stream")
-      a.download = 'screenshot.png'
+        .replace("image/png", "image/octet-stream");
+      a.download = "screenshot.png";
 
-      a.click()
+      a.click();
     }
   };
 
