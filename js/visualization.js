@@ -1,7 +1,8 @@
 let prefs = {
   dimensions: 3,
   shapeType: "hypercube",
-  rotationSpeed: 0.1
+  rotationSpeed: 0.1,
+  perspective: true
 };
 
 let animationMatrix = math.eye(prefs.dimensions + 1);
@@ -176,8 +177,8 @@ function onWindowResize() {
 }
 
 function project(p) {
-  if (p.length > 3) {
-    return project(perspectiveProject(p));
+  if (p.length > 2) {
+    return project(prefs.perspective? perspectiveProject(p): parallelProject(p));
   }
 
   return p.concat(0);
@@ -234,6 +235,8 @@ function setupGui() {
     .add(prefs, "rotationSpeed", 0, 1)
     .name("Rotation Speed")
     .step(0.05);
+  
+  gui.add(prefs, 'perspective').name('Perspective Projection')
 
   const screenshotObj = {
     snap: () => {
