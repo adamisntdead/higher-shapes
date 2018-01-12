@@ -2,7 +2,10 @@ let prefs = {
   dimensions: 3,
   shapeType: "hypercube",
   rotationSpeed: 0.1,
-  perspective: true
+  perspective: true,
+  useAxis: false,
+  axis1: 2,
+  axis2: 1
 };
 
 let animationMatrix = math.eye(prefs.dimensions + 1);
@@ -237,6 +240,21 @@ function setupGui() {
     .add(prefs, "rotationSpeed", 0, 1)
     .name("Rotation Speed")
     .step(0.05);
+
+  var rotation = gui.addFolder('Rotation Preferences');
+  const useGui = rotation.add(prefs, 'useAxis').name('Rotate About Axis')
+  const axis1Gui = rotation.add(prefs, 'axis1').name('Axis 1');
+  const axis2Gui = rotation.add(prefs, 'axis2').name('Axis 2');
+
+  useGui.onFinishChange(() => {
+    updateAnimationMatrix()
+  })
+  axis1Gui.onFinishChange(() => {
+    updateAnimationMatrix()
+  })
+  axis2Gui.onFinishChange(() => {
+    updateAnimationMatrix()
+  })
   
   gui.add(prefs, 'perspective').name('Perspective Projection')
 
@@ -274,10 +292,14 @@ function setupGui() {
 function updateAnimationMatrix() {
   animationMatrix = math.eye(prefs.dimensions + 1);
 
-  combinations(_.range(1, prefs.dimensions + 1)).forEach(xs => {
-    animationMatrix = math.multiply(
-      animationMatrix,
-      rotate(prefs.rotationSpeed / 10, xs[0], xs[1], prefs.dimensions)
-    );
-  });
+  if (prefs.useAxis) {
+    animationMatrix = rotate(prefs.rotationSpeed / 10, prefs.axis1, prefs.axis2, prefs.dimensions)
+  } else {
+    combinations(_.range(1, prefs.dimensions + 1)).forEach(xs => {
+      animationMatrix = math.multiply(
+        animationMatrix,
+        rotate(prefs.rotationSpeed / 10, xs[0], xs[1], prefs.dimensions)
+      );
+    });
+  }
 }
