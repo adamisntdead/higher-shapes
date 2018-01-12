@@ -231,6 +231,8 @@ function setupGui() {
       "cliffords torus"
     ])
     .name("Type Of Shape");
+
+    gui.add(camera.position, 'z', 0, 50).name('z-Position').step(2)
   const speedGui = gui
     .add(prefs, "rotationSpeed", 0, 1)
     .name("Rotation Speed")
