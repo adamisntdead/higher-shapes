@@ -3,6 +3,8 @@
   Visualize n-Dimensional Polytopes From Your Browser.
 
   Our Entry To The BT Young Scientist 2018
+  [![DOI](https://zenodo.org/badge/115955220.svg)](https://zenodo.org/badge/latestdoi/115955220)
+
 </p>
 
 > Read the [paper](https://rawgit.com/adamisntdead/higher-shapes/master/paper.pdf)
