@@ -5,6 +5,8 @@
   Our Entry To The BT Young Scientist 2018
 </p>
 
+> Read the [paper](https://rawgit.com/adamisntdead/higher-shapes/master/paper.pdf)
+
 ## Contents
 This repository contains a model of a 4D hypercube ready for printing, `hypercube.stl`. This was created using [this JSFiddle](https://jsfiddle.net/89nL4xvu/1/)
 
